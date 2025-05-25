@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>EL MÁS PODEROSO - LAG EXTREMO</title>
+<style>
+  body {
+    margin: 0; 
+    overflow: hidden; 
+    background: black;
+  }
+  .explosion {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: explode 1s forwards;
+    mix-blend-mode: screen;
+  }
+  @keyframes explode {
+    0% {transform: scale(0) rotate(0deg); opacity: 1;}
+    100% {transform: scale(5) rotate(720deg); opacity: 0;}
+  }
+</style>
+</head>
+<body>
+
+<script>
+  // Spam explosiones random para el caos visual extremo
+  function createExplosion() {
+    const div = document.createElement('div');
+    div.classList.add('explosion');
+    div.style.width = div.style.height = Math.random() * 100 + 50 + 'px';
+    div.style.background = `hsl(${Math.random()*360}, 100%, 50%)`;
+    div.style.left = Math.random() * window.innerWidth + 'px';
+    div.style.top = Math.random() * window.innerHeight + 'px';
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 1000);
+  }
+
+  // Loop infinito que genera mil explosiones por segundo (ajusta si explota tu máquina)
+  setInterval(() => {
+    for (let i = 0; i < 1000; i++) createExplosion();
+  }, 1000);
+
+  // Código loco que hace que el mouse cree miles de clones del cursor con colores cambiantes
+  document.body.style.cursor = 'none';
+  window.addEventListener('mousemove', e => {
+    for(let i=0; i<20; i++){
+      let span = document.createElement('span');
+      span.style.position = 'fixed';
+      span.style.left = e.clientX + Math.random()*40 - 20 + 'px';
+      span.style.top = e.clientY + Math.random()*40 - 20 + 'px';
+      span.style.width = span.style.height = '10px';
+      span.style.background = `hsl(${Math.random()*360}, 100%, 50%)`;
+      span.style.borderRadius = '50%';
+      span.style.pointerEvents = 'none';
+      span.style.mixBlendMode = 'screen';
+      document.body.appendChild(span);
+      setTimeout(() => span.remove(), 2000);
+    }
+  });
+
+  // Loop infinito que lanza miles de animaciones CSS locas y pesadas
+  for(let i=0; i<500; i++){
+    let div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.left = Math.random()*window.innerWidth + 'px';
+    div.style.top = Math.random()*window.innerHeight + 'px';
+    div.style.width = div.style.height = Math.random()*50 + 10 + 'px';
+    div.style.background = `hsl(${Math.random()*360}, 100%, 50%)`;
+    div.style.borderRadius = '50%';
+    div.style.animation = `explode ${2 + Math.random()*3}s infinite`;
+    div.style.mixBlendMode = 'screen';
+    document.body.appendChild(div);
+  }
+</script>
+
+</body>
+</html>
